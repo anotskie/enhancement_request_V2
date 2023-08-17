@@ -1,19 +1,19 @@
-// src/Login.jsx
+// src/Register.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Perform login logic here (e.g., API calls, authentication)
-    console.log('Logging in with:', username, password);
+  const handleRegister = () => {
+    // Perform registration logic here (e.g., API calls, user creation)
+    console.log('Registering with:', username, password);
   };
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <div>
         <label>
           Username:
@@ -26,12 +26,12 @@ function Login() {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
       </div>
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleRegister}>Register</button>
       <p>
-        Don't have an account? <Link to="/register">Register</Link>
+        Already have an account? <Link to="/">Login</Link>
       </p>
     </div>
   );
 }
 
-export default Login;
+export default Register;
