@@ -9,8 +9,7 @@ media
 # Backup files # 
 *.bak 
 
-*/migrations/*
-**/migrations/
+
 
 # If you are using PyCharm # 
 # User-specific stuff
