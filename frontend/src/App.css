@@ -1,42 +1,56 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.article-card {
+  margin: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.article-card:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.article-content {
+  padding: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.comments-section {
+  margin-top: 15px;
+  align-items: center;
 }
 
-.card {
-  padding: 2em;
+.custom-card {
+  border: none;
 }
 
-.read-the-docs {
-  color: #888;
-} */
+.vote-button {
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 50px;
+}
+
+.vote-button-inner {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.vote-icon {
+  margin-right: 5px;
+}
+
+.voted .vote-icon {
+  color: white;
+}
+
+.vote-count {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.status {
+  margin-right: 20px;
+  padding: 3px;
+}
