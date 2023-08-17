@@ -53,7 +53,34 @@ const EnhancementRequestList = () => {
       <Button className='mb-5' onClick={() => setShowModal(true)}>Add Enhancement Request</Button>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
-        {/* Modal content */}
+        <Modal.Header closeButton>
+          <Modal.Title>Add Enhancement Request</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="newRequestTitle">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                value={newRequestTitle}
+                onChange={(e) => setNewRequestTitle(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="newRequestDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={newRequestDescription}
+                onChange={(e) => setNewRequestDescription(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
+          <Button variant="primary" onClick={handleCreateEnhancementRequest}>Create</Button>
+        </Modal.Footer>
       </Modal>
 
       <div className='d-flex justify-content-center align-items-center'>
@@ -71,6 +98,7 @@ const EnhancementRequestList = () => {
                 <div key={comment.id}>
                   <p>{comment.content}</p>
                   <p>Posted by: {comment.username}</p>
+                  <p>Created at: {comment.created_at}</p>
                   <hr />
                 </div>
               ))}

@@ -21,10 +21,19 @@ export const createEnhancementRequest = async (title, description, token) => {
     return response.json();
   };
   
+  const fetchUsername = async (userId) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/users/${userId}/`);
+      return response.data.username; // Assuming 'username' is the field for the username in user model
+    } catch (error) {
+      throw error;
+    }
+  };
+  
   export const createComment = async (enhancementRequestId, content, userId, token) => {
     const requestData = {
       enhancement_request: enhancementRequestId,
-      user: userId, // Use the provided userId
+      user: userId,
       content,
     };
   
@@ -44,24 +53,13 @@ export const createEnhancementRequest = async (title, description, token) => {
     const responseData = await response.json();
   
     // Fetch the username associated with the user ID in the comment
-    const username = await fetchUsername(userId);
+    const username = await fetchUsername(responseData.user); // Use responseData.user instead of userId
   
     return {
       ...responseData,
       username,
     };
   };
-  
-  const fetchUsername = async (userId) => {
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/users/${userId}/`);
-      return response.data.username; // Assuming 'username' is the field for the username in user model
-    } catch (error) {
-      throw error;
-    }
-  };
-  
-  
   
   
   export const voteForEnhancementRequest = async (enhancementRequestId, token) => {

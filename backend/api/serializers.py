@@ -33,9 +33,14 @@ class EnhancementRequestCreateSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
     
 class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField()  # Add this line
+
     class Meta:
         model = Comment
         fields = '__all__'
+
+    def get_username(self, obj):
+        return obj.user.username
 
 class EnhancementRequestSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
