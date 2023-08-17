@@ -6,7 +6,7 @@ import BadgeMUI from "@mui/material/Badge";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import "../../../App.css";
 
-const ArticleCardComponent = ({ article }) => {
+const ArticleCardComponent = ({ article, onEdit}) => {
 
 
  
@@ -35,13 +35,16 @@ const ArticleCardComponent = ({ article }) => {
       <Col sm={10}>
         <Card className="article-content" style={{ border: "none" }}>
           <Card.Body>
+            
             <div>
               <Card.Title>Title</Card.Title>
               <Card.Text>
                Desc
               </Card.Text>
             </div>
+            
           </Card.Body>
+          <Button onClick={() => onEdit(article)}>Edit</Button>
         </Card>
         <div className="comments-section d-flex justify-content-between">
           <div className="d-flex align-items-center">

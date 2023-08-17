@@ -17,10 +17,13 @@ import ModalComponent from "./Modal/NewIdeas";
 
 import ArticleCardComponent from "./Card/ForumCard";
 import "../../App.css";
+import ModalComponentEdit from "./Modal/EditIdeas";
 
 
 const Forums = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedArticle, setSelectedArticle] = useState(null);
 
     const openModal = () => {
       setIsModalOpen(true);
@@ -29,6 +32,17 @@ const Forums = () => {
     const closeModal = () => {
       setIsModalOpen(false);
     };
+
+    const openEditModal = (article) => {
+        setSelectedArticle(article);
+        setIsEditModalOpen(true);
+      };
+    
+      const closeEditModal = () => {
+        setSelectedArticle(null);
+        setIsEditModalOpen(false);
+      };
+    
 
   
  
@@ -61,14 +75,16 @@ const Forums = () => {
               <Row>
                 <Col md={{ span: 12 }}>
                   
-                    <ArticleCardComponent
-
+                    <ArticleCardComponent onEdit={openEditModal} />
+                    <ModalComponentEdit
+                        showEdit={isEditModalOpen}
+                        handleCloseEdit={closeEditModal}
+      
                     />
-                  
                 </Col>
               </Row>
             </Col>
-            <Col> <Button variant="danger">Danger</Button></Col>
+            <Col> <Button variant="danger">Logout</Button></Col>
           </Row>
         </Container>
       </div>
