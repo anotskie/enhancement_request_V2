@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const createEnhancementRequest = async (title, description, token) => {
     const requestData = {
       title,
@@ -40,7 +41,24 @@ export const createEnhancementRequest = async (title, description, token) => {
       throw new Error('Error creating comment');
     }
   
-    return response.json();
+    const responseData = await response.json();
+  
+    // Fetch the username associated with the user ID in the comment
+    const username = await fetchUsername(userId);
+  
+    return {
+      ...responseData,
+      username,
+    };
+  };
+  
+  const fetchUsername = async (userId) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/users/${userId}/`);
+      return response.data.username; // Assuming 'username' is the field for the username in user model
+    } catch (error) {
+      throw error;
+    }
   };
   
   
@@ -71,3 +89,17 @@ export const createEnhancementRequest = async (title, description, token) => {
     return response.json();
   };
   
+  export const fetchCommentsForEnhancementRequest = async (enhancementRequestId, token) => {
+    const response = await fetch(`http://127.0.0.1:8000/enhancement-requests/${enhancementRequestId}/comments/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error('Error fetching comments');
+    }
+  
+    return response.json();
+  };

@@ -30,8 +30,9 @@ const CommentSection = ({ enhancementRequestId }) => {
         onChange={(e) => setContent(e.target.value)}
         placeholder="Write a comment..."
       />
+      <div>
       <button onClick={handleCommentSubmit}>Submit Comment</button>
-    </div>
+    </div></div>
   );
 };
 

@@ -12,12 +12,14 @@ function Login() {
     try {
       const accessToken = await ApiService.login(username, password);
       const user_id = localStorage.getItem('user_id'); // Retrieve the user ID from local storage
-  
+      const name = localStorage.getItem('name'); // Retrieve the user ID from local storage
       localStorage.setItem('access_token', accessToken);
       localStorage.setItem('user_id', user_id);
+      localStorage.setItem('name', username);
   
       console.log('Logged in successfully with access token:', accessToken);
       console.log('User ID:', user_id);
+      console.log('Name:', username);
   
       // Redirect to the /test page after successful login
       navigate('/test');
