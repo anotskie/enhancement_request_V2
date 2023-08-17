@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { fetchEnhancementRequests, voteForEnhancementRequest } from '../API/API_Services';
+import { useNavigate } from 'react-router-dom';
+import { fetchEnhancementRequests, voteForEnhancementRequest, createComment } from '../API/API_Services'; // Import createComment
+import CommentSection from './comment';
 
 const EnhancementRequestList = () => {
   const [enhancementRequests, setEnhancementRequests] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -34,7 +37,9 @@ const EnhancementRequestList = () => {
         <div key={request.id}>
           <h2>{request.title}</h2>
           <p>{request.description}</p>
+          <p>Votes: {request.votes}</p>
           <button onClick={() => handleVote(request.id)}>Vote</button>
+          <CommentSection enhancementRequestId={request.id} />
           <hr />
         </div>
       ))}

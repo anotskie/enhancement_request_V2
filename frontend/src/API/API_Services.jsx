@@ -4,7 +4,7 @@ export const createEnhancementRequest = async (title, description, token) => {
       description,
     };
   
-    const response = await fetch('/api/enhancement-requests/', {
+    const response = await fetch('http://127.0.0.1:8000/enhancement-requests/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,10 +22,12 @@ export const createEnhancementRequest = async (title, description, token) => {
   
   export const createComment = async (enhancementRequestId, content, token) => {
     const requestData = {
+      enhancement_request: enhancementRequestId, // Provide the enhancement request ID
+      user: userId, // Replace userId with the actual user ID of the logged-in user
       content,
     };
   
-    const response = await fetch(`/api/enhancement-requests/${enhancementRequestId}/comments/create/`, {
+    const response = await fetch(`http://127.0.0.1:8000/enhancement-requests/${enhancementRequestId}/comments/create/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,8 +43,9 @@ export const createEnhancementRequest = async (title, description, token) => {
     return response.json();
   };
   
+  
   export const voteForEnhancementRequest = async (enhancementRequestId, token) => {
-    const response = await fetch(`/api/enhancement-requests/${enhancementRequestId}/vote/`, {
+    const response = await fetch(`http://127.0.0.1:8000/enhancement-requests/${enhancementRequestId}/vote/`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -57,7 +60,7 @@ export const createEnhancementRequest = async (title, description, token) => {
   };
   
   export const fetchEnhancementRequests = async () => {
-    const response = await fetch('/api/enhancement-requests/');
+    const response = await fetch('http://127.0.0.1:8000/enhancement-requests/');
   
     if (!response.ok) {
       throw new Error('Error fetching enhancement requests');

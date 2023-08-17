@@ -4,7 +4,10 @@ const ApiService = {
   login: async (username, password) => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/login/', { username, password });
-      return response.data.access_token;
+      const { access_token, user_id } = response.data;
+      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('user_id', user_id); // Store the user ID in local storage
+      return access_token;
     } catch (error) {
       throw error;
     }

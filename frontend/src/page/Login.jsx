@@ -1,17 +1,21 @@
+// Login.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import ApiService from '../API/userAPI'; // Import the ApiService you created
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import ApiService from '../API/userAPI';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Use useNavigate for navigation
 
   const handleLogin = async () => {
     try {
       const accessToken = await ApiService.login(username, password);
-      // Store the access token in local storage or context for future API requests
+      localStorage.setItem('access_token', accessToken);
       console.log('Logged in successfully with access token:', accessToken);
-      // Redirect or perform other actions after successful login
+
+      // Redirect to the /test page after successful login
+      navigate('/test'); // Use navigate instead of history.push
     } catch (error) {
       console.error('Login error:', error);
       // Handle login error, show error message, etc.
