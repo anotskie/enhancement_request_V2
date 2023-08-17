@@ -20,10 +20,10 @@ export const createEnhancementRequest = async (title, description, token) => {
     return response.json();
   };
   
-  export const createComment = async (enhancementRequestId, content, token) => {
+  export const createComment = async (enhancementRequestId, content, userId, token) => {
     const requestData = {
-      enhancement_request: enhancementRequestId, // Provide the enhancement request ID
-      user: userId, // Replace userId with the actual user ID of the logged-in user
+      enhancement_request: enhancementRequestId,
+      user: userId, // Use the provided userId
       content,
     };
   
@@ -42,6 +42,8 @@ export const createEnhancementRequest = async (title, description, token) => {
   
     return response.json();
   };
+  
+  
   
   
   export const voteForEnhancementRequest = async (enhancementRequestId, token) => {

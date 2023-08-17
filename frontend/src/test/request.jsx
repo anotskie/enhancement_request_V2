@@ -39,7 +39,7 @@ const EnhancementRequestList = () => {
           <p>{request.description}</p>
           <p>Votes: {request.votes}</p>
           <button onClick={() => handleVote(request.id)}>Vote</button>
-          <CommentSection enhancementRequestId={request.id} />
+          <CommentSection enhancementRequestId={request.id} /> {/* Pass the enhancementRequestId */}
           <hr />
         </div>
       ))}

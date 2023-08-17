@@ -11,17 +11,21 @@ function Login() {
   const handleLogin = async () => {
     try {
       const accessToken = await ApiService.login(username, password);
+      const user_id = localStorage.getItem('user_id'); // Retrieve the user ID from local storage
+  
       localStorage.setItem('access_token', accessToken);
+      localStorage.setItem('user_id', user_id);
+  
       console.log('Logged in successfully with access token:', accessToken);
-
+      console.log('User ID:', user_id);
+  
       // Redirect to the /test page after successful login
-      navigate('/test'); // Use navigate instead of history.push
+      navigate('/test');
     } catch (error) {
       console.error('Login error:', error);
-      // Handle login error, show error message, etc.
     }
   };
-
+  
   return (
     <div>
       <h2>Login</h2>
