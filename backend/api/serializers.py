@@ -6,7 +6,7 @@ from .models import EnhancementRequest, Comment
 
     
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)  # Add this field
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password')
         user = User.objects.create(**validated_data)
-        user.set_password(password)  # Hash the password
+        user.set_password(password)
         user.save()
         return user
 
@@ -25,7 +25,7 @@ class EnhancementRequestCreateSerializer(serializers.ModelSerializer):
         fields = ['title', 'description']
 
     def to_representation(self, instance):
-        print(instance.comments.all())  # Add this line to inspect the comments data
+        print(instance.comments.all())
         return super().to_representation(instance)
     
     def create(self, validated_data):
@@ -33,7 +33,7 @@ class EnhancementRequestCreateSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
     
 class CommentSerializer(serializers.ModelSerializer):
-    username = serializers.SerializerMethodField()  # Add this line
+    username = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment

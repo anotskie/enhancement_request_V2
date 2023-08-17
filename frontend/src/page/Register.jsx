@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ApiService from '../API/userAPI'; // Import the ApiService you created
+import ApiService from '../API/userAPI';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -10,11 +10,9 @@ function Register() {
   const handleRegister = async () => {
     try {
       await ApiService.register(username, password, email);
-      // Registration successful, you can redirect to the login page or show a success message
       console.log('Registration successful');
     } catch (error) {
       console.error('Registration error:', error);
-      // Handle registration error, show error message, etc.
     }
   };
 

@@ -1,18 +1,17 @@
-// Login.jsx
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import ApiService from '../API/userAPI';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Use useNavigate for navigation
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       const accessToken = await ApiService.login(username, password);
-      const user_id = localStorage.getItem('user_id'); // Retrieve the user ID from local storage
-      const name = localStorage.getItem('name'); // Retrieve the user ID from local storage
+      const user_id = localStorage.getItem('user_id');
+      const name = localStorage.getItem('name');
       localStorage.setItem('access_token', accessToken);
       localStorage.setItem('user_id', user_id);
       localStorage.setItem('name', username);
@@ -20,8 +19,7 @@ function Login() {
       console.log('Logged in successfully with access token:', accessToken);
       console.log('User ID:', user_id);
       console.log('Name:', username);
-  
-      // Redirect to the /test page after successful login
+
       navigate('/test');
     } catch (error) {
       console.error('Login error:', error);
