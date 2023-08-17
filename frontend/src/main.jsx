@@ -8,6 +8,7 @@ import Login from './page/Login.jsx';
 import Register from './page/Register';
 import Home from './page/Home';
 import Request from './test/request';
+import CommentComponent from './components/Forum/Comments/UserComments';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     path:'/test',
     element:<Request/>
 
+  },
+  {
+    path:'/comments/:id',
+    element: <CommentComponent/>
   }
 ]);
 

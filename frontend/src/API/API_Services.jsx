@@ -85,7 +85,7 @@ export const createEnhancementRequest = async (title, description, token) => {
   };
   
   export const fetchCommentsForEnhancementRequest = async (enhancementRequestId, token) => {
-    const response = await fetch(`http://127.0.0.1:8000/enhancement-requests/${enhancementRequestId}/comments/`, {
+    const response = await fetch(`http://127.0.0.1:8000/enhancement-requests/${enhancementRequestId}/comments/list/`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
