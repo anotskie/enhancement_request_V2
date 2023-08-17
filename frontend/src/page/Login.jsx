@@ -1,14 +1,21 @@
-// src/Login.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ApiService from '../API/userAPI'; // Import the ApiService you created
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Perform login logic here (e.g., API calls, authentication)
-    console.log('Logging in with:', username, password);
+  const handleLogin = async () => {
+    try {
+      const accessToken = await ApiService.login(username, password);
+      // Store the access token in local storage or context for future API requests
+      console.log('Logged in successfully with access token:', accessToken);
+      // Redirect or perform other actions after successful login
+    } catch (error) {
+      console.error('Login error:', error);
+      // Handle login error, show error message, etc.
+    }
   };
 
   return (

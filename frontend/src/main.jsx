@@ -7,7 +7,7 @@ import Root from './routes/Root.jsx';
 import Login from './page/Login.jsx'
 import Register from './page/Register';
 import Home from './page/Home';
-
+import Request from './test/request';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -28,6 +28,11 @@ const router = createBrowserRouter([
   {
     path:'/home',
     element:<Home/>
+
+  },
+  {
+    path:'/test',
+    element:<Request/>
 
   }
 
