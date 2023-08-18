@@ -9,6 +9,7 @@ import "../../../App.css";
 import CommentSection from "../../../test/comment";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchEnhancementRequests, voteForEnhancementRequest} from '../../../API/API_Services'; // Import createComment
+import NavbarComponent from "../../Navigation/Header";
 
 const CommentComponent = ({ onEdit }) => {
   const statusColor = "#6ec5b8";
@@ -31,10 +32,12 @@ const CommentComponent = ({ onEdit }) => {
 
   return (
 <div>
+
+    <NavbarComponent></NavbarComponent>
   {forumRetrieved && (
-    <Row className="article-card" key={forumRetrieved.id}>
+    <Row className="comments-card" key={forumRetrieved.id}>
       <Col sm={2}>
-        <div>
+        <div className="vote-button">
           <BadgeMUI
             badgeContent={forumRetrieved.votes}
             color="info"
@@ -55,6 +58,8 @@ const CommentComponent = ({ onEdit }) => {
           </Card.Body>
         </Card>
         <Container>
+
+          
        <CommentSection enhancementRequestId={forumRetrieved.id} />
         {forumRetrieved?.comments && forumRetrieved.comments.length > 0 && (
           <div className="comments-section">

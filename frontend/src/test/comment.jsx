@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 const CommentSection = ({ enhancementRequestId }) => {
   const [content, setContent] = useState('');
   const userId = localStorage.getItem('user_id');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCommentSubmit = async () => {
     if (!userId) {
@@ -17,6 +18,10 @@ const CommentSection = ({ enhancementRequestId }) => {
       await createComment(enhancementRequestId, content, userId, token);
       setContent('');
     } catch (error) {
+
+
+
+
       console.error('Error creating comment:', error);
     }
   };
@@ -31,9 +36,13 @@ const CommentSection = ({ enhancementRequestId }) => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Write a comment..."
+              
               rows={4}
             />
           </Form.Group>
+
+          
+
           <Button className='d-flex justify-content-end mt-2' variant="primary" onClick={handleCommentSubmit}>
             Submit Comment
           </Button>

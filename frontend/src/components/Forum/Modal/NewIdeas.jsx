@@ -12,6 +12,7 @@ function ModalComponent({
 
   const [showModal, setShowModal] = useState(false);
   const [newRequestTitle, setNewRequestTitle] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [newRequestDescription, setNewRequestDescription] = useState('');
 
   const handleCreateEnhancementRequest = async () => {
@@ -22,6 +23,15 @@ function ModalComponent({
       setRefreshed(!refreshed)
       
     } catch (error) {
+
+        if (error.response && error.response.status === 400) {
+            setErrorMessage('An error has occured. Please try again later..');
+          } 
+        else {
+            setErrorMessage('Fields Required');
+          }
+
+
       console.error('Error creating enhancement request:', error);
     }
   };
@@ -53,11 +63,16 @@ function ModalComponent({
               />
             </Form.Group>
           </Form>
+
+             {errorMessage && <p className="text-danger">{errorMessage}</p>}
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
           <Button variant="primary" onClick={handleCreateEnhancementRequest}>Create</Button>
+         
         </Modal.Footer>
+        
       </Modal>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Button, } from "react-bootstrap";
+import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import BadgeMUI from "@mui/material/Badge";
@@ -21,7 +21,6 @@ const ArticleCardComponent = ({
 
   const statusColor = "#6ec5b8";
   const displayStatus = "Active";
-  const commentCount = 1000;
   
   const handleSeeMore = (requestId) => {
     setExpandedRequests([...expandedRequests, requestId]);
@@ -67,7 +66,7 @@ const ArticleCardComponent = ({
       {enhancementRequests.map(request => (
       <Row className="article-card">
       <Col sm={2}>
-        <div onClick={() => handleVote(request.id)} style={{ cursor: 'pointer' }}>
+        <div className="vote-button" onClick={() => handleVote(request.id)} style={{ cursor: 'pointer' }}>
           <BadgeMUI
             badgeContent={request.votes}
             color="info"

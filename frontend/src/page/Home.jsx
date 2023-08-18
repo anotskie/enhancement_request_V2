@@ -20,7 +20,7 @@ import Forums from "../components/Forum/Discussion";
 function AutoLayoutExample() {
   return (
 
-   <div>
+   <div >
     <Header/>
     <Container>
 

@@ -57,7 +57,7 @@ const Forums = () => {
       };
   
   return (
-    <div>
+    <div >
 
       <div className="d-flex justify-content-center">
         <Container className="mt-3">
