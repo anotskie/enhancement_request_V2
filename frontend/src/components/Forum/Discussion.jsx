@@ -19,53 +19,43 @@ import ArticleCardComponent from "./Card/ForumCard";
 import "../../App.css";
 import ModalComponentEdit from "./Modal/EditIdeas";
 import ApiService from "../../API/userAPI";
+import { editEnhancementRequest } from "../../API/API_Services";
 
 
 const Forums = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedArticle, setSelectedArticle] = useState(null);
     const [expandedRequests, setExpandedRequests] = useState([]);
     const [refreshed, setRefreshed] = useState(false);
+    const [selectedRequestId, setSelectedRequestId] = useState(null); // State for selected enhancement request ID
+     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedArticle, setSelectedArticle] = useState(null);
 
-
-    const openModal = () => {
-      setIsModalOpen(true);
-    };
-  
     const closeModal = () => {
       setIsModalOpen(false);
+      setSelectedRequestId(null);
     };
 
     const openEditModal = (article) => {
-        setSelectedArticle(article);
-        setIsEditModalOpen(true);
-      };
-    
-      const closeEditModal = () => {
-        setSelectedArticle(null);
-        setIsEditModalOpen(false);
-      };
+      setSelectedArticle(article);
+      setIsEditModalOpen(true);
+    };
+
+    const closeEditModal = () => {
+      setSelectedArticle(null);
+      setIsEditModalOpen(false);
+    };
 
       const handleLogout = async () => {
         try {
-          const refreshToken = localStorage.getItem("refresh_token"); // Assuming you store the refresh token in localStorage
+          const refreshToken = localStorage.getItem("refresh_token");
           await ApiService.logout(refreshToken);
-          // Clear user-related data from localStorage
           localStorage.removeItem("access_token");
           localStorage.removeItem("user_id");
-          // Redirect or perform other actions after logout
         } catch (error) {
           console.error("Logout error:", error);
         }
       };
-    
-
   
- 
-
- 
-
   return (
     <div>
 
@@ -73,11 +63,11 @@ const Forums = () => {
         <Container className="mt-3">
           <Row>
             <Col md={3}>
-            <Button onClick={openModal}>Create Article</Button>
+            
             <ModalComponent
                 setRefreshed = {setRefreshed}
                 refreshed = {refreshed}
-                show={isModalOpen} // Pass the modal state as a prop
+                show={isModalOpen}
                 onClose={closeModal}
               />
             </Col>
@@ -95,15 +85,17 @@ const Forums = () => {
                 <Col md={{ span: 12 }}>
                   
                     <ArticleCardComponent 
-                    expandedRequests = {expandedRequests}
-                    setExpandedRequests = {setExpandedRequests}
+                    expandedRequests={expandedRequests}
+                    setExpandedRequests={setExpandedRequests}
                     refreshed={refreshed}
+                    openEditModal={openEditModal}
+                    />
 
-                    onEdit={openEditModal} />
                     <ModalComponentEdit
-                        showEdit={isEditModalOpen}
-                        handleCloseEdit={closeEditModal}
-      
+                      showEdit={isEditModalOpen}
+                      handleCloseEdit={closeEditModal}
+                      editArticle={selectedRequestId}
+                      article={selectedArticle}
                     />
                 </Col>
               </Row>

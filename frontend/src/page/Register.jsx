@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '../API/userAPI';
+import { Card } from 'react-bootstrap';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -17,7 +18,8 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", backgroundColor: "#87CEEB" }}>
+      <Card className="p-3" style={{ backgroundColor: "#FFF", width: "30rem" }}>
       <h2>Register</h2>
       <div>
         <label>
@@ -41,6 +43,7 @@ function Register() {
       <p>
         Already have an account? <Link to="/">Login</Link>
       </p>
+      </Card>
     </div>
   );
 }

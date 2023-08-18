@@ -3,7 +3,6 @@ import { Modal, Form, Button } from "react-bootstrap";
 import "../../../App.css";
 import { createEnhancementRequest, fetchEnhancementRequests } from "../../../API/API_Services";
 
-
 function ModalComponent({
   setRefreshed,
   refreshed,
@@ -11,13 +10,9 @@ function ModalComponent({
   onClose
 }) {
 
-
-
   const [showModal, setShowModal] = useState(false);
-  
   const [newRequestTitle, setNewRequestTitle] = useState('');
   const [newRequestDescription, setNewRequestDescription] = useState('');
-
 
   const handleCreateEnhancementRequest = async () => {
     try {
@@ -30,8 +25,6 @@ function ModalComponent({
       console.error('Error creating enhancement request:', error);
     }
   };
-
-
 
   return (
     <div>

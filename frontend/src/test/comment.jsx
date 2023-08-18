@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createComment } from '../API/API_Services';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const CommentSection = ({ enhancementRequestId }) => {
   const [content, setContent] = useState('');
@@ -21,16 +22,23 @@ const CommentSection = ({ enhancementRequestId }) => {
   };
 
   return (
-    <div>
-      <h3>Comments</h3>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Write a comment..."
-      />
-      <div>
-      <button onClick={handleCommentSubmit}>Submit Comment</button>
-    </div></div>
+      <Row>
+        <Col>
+          <h3>Comments</h3>
+          <Form.Group controlId="commentTextarea">
+            <Form.Control
+              as="textarea"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write a comment..."
+              rows={4}
+            />
+          </Form.Group>
+          <Button className='d-flex justify-content-end mt-2' variant="primary" onClick={handleCommentSubmit}>
+            Submit Comment
+          </Button>
+        </Col>
+      </Row>
   );
 };
 

@@ -98,3 +98,19 @@ export const createEnhancementRequest = async (title, description, token) => {
   
     return response.json();
   };
+
+  export const editEnhancementRequest = async (requestId, requestData, token) => {
+    const response = await axios.put(`http://127.0.0.1:8000/enhancement-requests/${requestId}/`, requestData, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error('Error editing request');
+    }
+  
+    return response.data;
+  };
+  

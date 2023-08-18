@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ApiService from '../API/userAPI';
+import { Card } from 'react-bootstrap';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -20,14 +21,15 @@ function Login() {
       console.log('User ID:', user_id);
       console.log('Name:', username);
 
-      navigate('/test');
+      navigate('/home');
     } catch (error) {
       console.error('Login error:', error);
     }
   };
   
   return (
-    <div>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", backgroundColor: "#87CEEB" }}>
+      <Card className="p-3" style={{ backgroundColor: "#FFF", width: "30rem" }}>
       <h2>Login</h2>
       <div>
         <label>
@@ -45,6 +47,7 @@ function Login() {
       <p>
         Don't have an account? <Link to="/register">Register</Link>
       </p>
+      </Card>
     </div>
   );
 }

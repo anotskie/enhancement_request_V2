@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Card, Button, ListGroup  } from "react-bootstrap";
+import { Row, Col, Card, Button, ListGroup, Container  } from "react-bootstrap";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import BadgeMUI from '@mui/material/Badge';
 import "../../../App.css";
+import CommentSection from "../../../test/comment";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchEnhancementRequests, voteForEnhancementRequest} from '../../../API/API_Services'; // Import createComment
-
 
 const CommentComponent = ({ onEdit }) => {
   const statusColor = "#6ec5b8";
@@ -53,11 +53,13 @@ const CommentComponent = ({ onEdit }) => {
           <Card.Body>
             <Card.Text>{forumRetrieved.description}</Card.Text>
           </Card.Body>
-          <Button variant="primary">Click</Button>
         </Card>
+        <Container>
+       <CommentSection enhancementRequestId={forumRetrieved.id} />
         {forumRetrieved?.comments && forumRetrieved.comments.length > 0 && (
           <div className="comments-section">
             <h3>Comments of the Users:</h3>
+            <p>Total Comments: {forumRetrieved.comments.length}</p>
             <ListGroup>
               {forumRetrieved.comments.map(comment => (
                 <ListGroup.Item key={comment.id} className="comment-item">
@@ -75,6 +77,7 @@ const CommentComponent = ({ onEdit }) => {
             </ListGroup>
           </div>
         )}
+        </Container>
       </Col>
     </Row>
   )}

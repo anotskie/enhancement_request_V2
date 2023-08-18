@@ -10,12 +10,17 @@ import { fetchEnhancementRequests, voteForEnhancementRequest, createComment } fr
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import { Link } from 'react-router-dom';
+import ModalComponentEdit from "../Modal/EditIdeas";
 
 const ArticleCardComponent = ({
-  onEdit, expandedRequests, setExpandedRequests, refreshed}) => {
+  expandedRequests,
+  setExpandedRequests,
+  refreshed,
+  openEditModal,
+}) => {
 
-  const statusColor = "#6ec5b8"; // Replace with your actual color
-  const displayStatus = "Active"; // Replace with your actual status
+  const statusColor = "#6ec5b8";
+  const displayStatus = "Active";
   const commentCount = 1000;
   
   const handleSeeMore = (requestId) => {
@@ -32,17 +37,13 @@ const ArticleCardComponent = ({
   useEffect(() => {
     try {
       fetchEnhancementRequests()
-        .then(data => setEnhancementRequests(data))
-        .catch(error => console.error('Error fetching enhancement requests:', error));
-    } catch (error) {
-      console.error('Error fetching enhancement requests:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      fetchEnhancementRequests()
-        .then(data => setEnhancementRequests(data))
+        .then(data => {
+          const updatedRequests = data.map(request => ({
+            ...request,
+            commentCount: request.comments ? request.comments.length : 0,
+          }));
+          setEnhancementRequests(updatedRequests);
+        })
         .catch(error => console.error('Error fetching enhancement requests:', error));
     } catch (error) {
       console.error('Error fetching enhancement requests:', error);
@@ -53,7 +54,6 @@ const ArticleCardComponent = ({
     try {
       const token = localStorage.getItem('access_token');
       await voteForEnhancementRequest(enhancementRequestId, token);
-      // Update the enhancement requests after voting
       fetchEnhancementRequests()
         .then(data => setEnhancementRequests(data))
         .catch(error => console.error('Error fetching enhancement requests:', error));
@@ -97,11 +97,13 @@ const ArticleCardComponent = ({
               </Card.Text>
             </div>
           </Card.Body>
-          <Button onClick={() => onEdit(request)}>Edit</Button>
+          <Button variant="primary" onClick={() => openEditModal(request)}>
+            Edit  
+          </Button>
         </Card>
         <div className="comments-section d-flex justify-content-between">
           <div className="d-flex align-items-center">
-            <b>Created by:{request.owner}</b>
+            <b>Created by: {request.owner}</b>
           </div>
           <div className="d-flex align-items-center">
             <div
@@ -116,9 +118,16 @@ const ArticleCardComponent = ({
             </div>
             <div className="comment-info d-flex align-items-center">
               <div className="comment-count mr-1">
-                <BadgeMUI badgeContent={commentCount} color="primary">
-                  <ForumOutlinedIcon />
-                </BadgeMUI>
+                <Link to={`/comments/${request.id}`}>
+                  <BadgeMUI
+                    badgeContent={request.commentCount}
+                    color="info"
+                    invisible={false}
+                    size="large"
+                  >
+                    <ForumOutlinedIcon fontSize="large" />
+                  </BadgeMUI>
+                </Link>
               </div>
             </div>
           </div>
